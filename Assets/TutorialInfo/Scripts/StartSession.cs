@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 public class StartSession : MonoBehaviour {
-    private ConvResponse response;
+    private ConvTeacherResponse response;
 
     void Start() {
         StartCoroutine(PostApiRequest());
