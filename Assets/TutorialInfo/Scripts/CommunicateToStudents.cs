@@ -11,7 +11,7 @@ public class CommunicateToStudents : MonoBehaviour {
     private string apiUrl = "http://195.242.13.194:8001/communicate_to_student";
 
     void Start() {
-        StartCoroutine(PostApiRequest());
+        // StartCoroutine(PostApiRequest());
     }
 
     private class RequestData {

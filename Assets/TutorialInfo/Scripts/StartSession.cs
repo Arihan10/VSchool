@@ -9,7 +9,7 @@ public class StartSession : MonoBehaviour {
     private ConvResponse response;
 
     void Start() {
-        StartCoroutine(PostApiRequest());
+        // StartCoroutine(PostApiRequest());
     }
 
     IEnumerator PostApiRequest() {
@@ -30,7 +30,7 @@ public class StartSession : MonoBehaviour {
                     string responseText = webRequest.downloadHandler.text;
                     Debug.Log($"Raw response: {responseText}");
 
-                    response = JsonConvert.DeserializeObject<ConvTeacherResponse>(responseText);
+                    response = JsonConvert.DeserializeObject<ConvResponse>(responseText);
 
                     if (response != null) {
                         Debug.Log($"Parsed content: {response.content}");

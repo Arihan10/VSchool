@@ -7,11 +7,13 @@ using Newtonsoft.Json;
 
 
 public class CreateSession : MonoBehaviour {
+    public static CreateSession instance; 
+
     public SessionModel session;
     private string apiUrl = "http://195.242.13.194:8001/session";
 
-    void Start() {
-        StartCoroutine(PostApiRequest());
+    void Awake() {
+        instance = this; 
     }
 
     private class RequestData {
@@ -19,13 +21,13 @@ public class CreateSession : MonoBehaviour {
         public string grade { get; set; }
     }
 
-    IEnumerator PostApiRequest() {
+    public IEnumerator PostApiRequest(string _subject, string _grade) {
         var requestData = new RequestData {
-            subject = "Intro to Python",
-            grade = "10"
+            subject = _subject,
+            grade = _grade
         };
 
-        string jsonData = JsonConvert.SerializeObject(requestData);
+        string jsonData = JsonConvert.SerializeObject(requestData); 
 
         using (UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST")) {
             byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
@@ -33,10 +35,15 @@ public class CreateSession : MonoBehaviour {
             webRequest.downloadHandler = new DownloadHandlerBuffer();
             webRequest.SetRequestHeader("Content-Type", "application/json");
 
+            Debug.Log("making request"); 
+
             yield return webRequest.SendWebRequest();
+
+            Debug.Log("made returned"); 
 
             if (webRequest.result == UnityWebRequest.Result.Success) {
                 try {
+                    Debug.Log("success"); 
                     string responseText = webRequest.downloadHandler.text;
                     session = JsonConvert.DeserializeObject<SessionModel>(responseText);
                 }
@@ -46,8 +53,7 @@ public class CreateSession : MonoBehaviour {
                 catch (Exception e) {
                     Debug.LogError($"General Error: {e.Message}");
                 }
-            }
-            else {
+            } else {
                 Debug.LogError($"Request Error: {webRequest.error}");
             }
         }
