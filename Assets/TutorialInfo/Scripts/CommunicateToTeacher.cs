@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using Newtonsoft.Json; 
 
 
 public class CommunicateToTeacher : MonoBehaviour {
@@ -40,7 +40,7 @@ public class CommunicateToTeacher : MonoBehaviour {
             if (webRequest.result == UnityWebRequest.Result.Success) {
                 try {
                     string responseText = webRequest.downloadHandler.text;
-                    response = JsonConvert.DeserializeObject<ConvResponse>(responseText);
+                    response = JsonConvert.DeserializeObject<ConvTeacherResponse>(responseText);
                     Debug.Log(response.content);
 
                 }
