@@ -11,6 +11,12 @@ public class ConvResponse {
     public string content { get; set; }
 }
 
+public class ConvTeacherResponse {
+    public string role { get; set; }
+    public string content { get; set; }
+    public bool finished { get; set; }
+}
+
 public class ScheduleItem {
     public string class_id { get; set; }
     public string start_time { get; set; }

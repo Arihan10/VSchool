@@ -30,7 +30,7 @@ public class StartSession : MonoBehaviour {
                     string responseText = webRequest.downloadHandler.text;
                     Debug.Log($"Raw response: {responseText}");
 
-                    response = JsonConvert.DeserializeObject<ConvResponse>(responseText);
+                    response = JsonConvert.DeserializeObject<ConvTeacherResponse>(responseText);
 
                     if (response != null) {
                         Debug.Log($"Parsed content: {response.content}");

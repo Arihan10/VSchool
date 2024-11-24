@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 
 public class CommunicateToTeacher : MonoBehaviour {
-    public ConvResponse response;
+    public ConvTeacherResponse response;
     private string apiUrl = "http://195.242.13.194:8001/communicate_to_teacher";
 
     void Start() {
