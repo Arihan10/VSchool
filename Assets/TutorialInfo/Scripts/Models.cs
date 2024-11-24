@@ -30,6 +30,7 @@ public class ClassModel {
     public List<string> units { get; set; }
     public List<Student> students { get; set; }
     public Teacher teacher { get; set; }
+    public string name { get; set; }
     public List<string> messages { get; set; }
 }
 
