@@ -10,7 +10,7 @@ public class CreateSession : MonoBehaviour {
     public static CreateSession instance; 
 
     public SessionModel session;
-    private string apiUrl = "http://195.242.13.194:8001/session";
+    private string apiUrl = "http://195.242.13.194:8001/session"; 
 
     void Awake() {
         instance = this; 

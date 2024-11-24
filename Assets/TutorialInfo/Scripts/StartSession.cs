@@ -6,15 +6,21 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 public class StartSession : MonoBehaviour {
-    private ConvTeacherResponse response;
+    public static StartSession instance; 
+
+    public ConvTeacherResponse response;
+
+    private void Awake() {
+        instance = this; 
+    }
 
     void Start() {
         // StartCoroutine(PostApiRequest());
     }
 
-    IEnumerator PostApiRequest() {
-        int session_id = 1732444521;
-        int class_id = 0;
+    public IEnumerator PostApiRequest(int _session_id, int _class_id) {
+        int session_id = _session_id; 
+        int class_id = _class_id; 
         string apiUrl = $"http://195.242.13.194:8001/session/{session_id}/start_class/{class_id}";
         Debug.Log($"Requesting URL: {apiUrl}");
 
@@ -30,7 +36,7 @@ public class StartSession : MonoBehaviour {
                     string responseText = webRequest.downloadHandler.text;
                     Debug.Log($"Raw response: {responseText}");
 
-                    response = JsonConvert.DeserializeObject<ConvResponse>(responseText);
+                    response = JsonConvert.DeserializeObject<ConvTeacherResponse>(responseText);
 
                     if (response != null) {
                         Debug.Log($"Parsed content: {response.content}");

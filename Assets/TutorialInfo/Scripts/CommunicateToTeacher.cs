@@ -7,8 +7,14 @@ using Newtonsoft.Json;
 
 
 public class CommunicateToTeacher : MonoBehaviour {
-    public ConvTeacherResponse response;
+    public static CommunicateToTeacher instance; 
+
+    public ConvTeacherResponse response; 
     private string apiUrl = "http://195.242.13.194:8001/communicate_to_teacher";
+
+    private void Awake() {
+        instance = this; 
+    }
 
     void Start() {
         // StartCoroutine(PostApiRequest());
@@ -20,11 +26,11 @@ public class CommunicateToTeacher : MonoBehaviour {
         public string message { get; set; }
     }
 
-    IEnumerator PostApiRequest() {
+    public IEnumerator PostApiRequest(string _session_id, string _class_id, string _message) {
         var requestData = new RequestData {
-            session_id = "1732444521",
-            class_id = "0",
-            message = "Something"
+            session_id = _session_id,
+            class_id = _class_id,
+            message = _message
         };
 
         string jsonData = JsonConvert.SerializeObject(requestData);
